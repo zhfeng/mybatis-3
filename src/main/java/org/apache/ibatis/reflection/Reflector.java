@@ -63,10 +63,12 @@ public class Reflector {
 
   public Reflector(Class<?> clazz) {
     type = clazz;
-    addDefaultConstructor(clazz);
-    addGetMethods(clazz);
-    addSetMethods(clazz);
-    addFields(clazz);
+    if (!type.equals(Class.class)) {
+      addDefaultConstructor(clazz);
+      addGetMethods(clazz);
+      addSetMethods(clazz);
+      addFields(clazz);
+    }
     readablePropertyNames = getMethods.keySet().toArray(new String[0]);
     writablePropertyNames = setMethods.keySet().toArray(new String[0]);
     for (String propName : readablePropertyNames) {
